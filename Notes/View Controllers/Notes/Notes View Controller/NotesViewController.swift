@@ -37,12 +37,12 @@ class NotesViewController: UIViewController {
         let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
 
         // Configure Fetch Request
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Note.updatedAt), ascending: false)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Note.category.name), ascending: false), NSSortDescriptor(key: #keyPath(Note.updatedAt), ascending: false)]
 
         // Create Fetched Results Controller
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                                   managedObjectContext: self.coreDataManager.mainManagedObjectContext,
-                                                                  sectionNameKeyPath: nil,
+                                                                  sectionNameKeyPath: #keyPath(Note.category.name),
                                                                   cacheName: nil)
 
         // Configure Fetched Results Controller
